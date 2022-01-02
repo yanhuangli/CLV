@@ -16,7 +16,7 @@ import datetime as dt
 df['one_month'] = df['orderdate'].apply(lambda x: dt.datetime(x.year,x.month,1))
 df1 = df.groupby('householdid').agg({'one_month':lambda x:min(x)}).reset_index()
 df1.columns = ['householdid','cohort']
-df = df.merge(df1,left_on='householdid',right_on='householdid')s
+df = df.merge(df1,left_on='householdid',right_on='householdid')
 df['cohort_month'] = df.orderdate.apply(lambda x : x.year*12+x.month)-\
                      df.cohort.apply(lambda x:x.year*12+x.month)+1
 df['cohort'] = df['cohort'].dt.strftime('%Y/%m')
